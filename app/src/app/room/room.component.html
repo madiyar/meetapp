@@ -1,0 +1,77 @@
+<nz-breadcrumb>
+    <nz-breadcrumb-item>
+        <a [routerLink]="['/']"><i nz-icon nzType="home"></i></a>
+    </nz-breadcrumb-item>
+    <nz-breadcrumb-item>
+        <a [routerLink]="['/rooms']"><i nz-icon nzType="appstore"></i> <span>Rooms</span></a>
+    </nz-breadcrumb-item>
+    <nz-breadcrumb-item>
+        {{ title }}
+    </nz-breadcrumb-item>
+</nz-breadcrumb>
+<form nz-form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <nz-form-item>
+        <div nz-row [nzType]="'flex'">
+            <div nzcol nzSpan="12" class="col">
+                <nz-upload
+                    class="avatar-uploader"
+                    nzAction="{{ env.apiUrl }}/uploader/image"
+                    nzName="file"
+                    nzListType="picture-card"
+                    [nzShowUploadList]="false"
+                    (nzChange)="handleChange($event)"
+                >
+                    <ng-container *ngIf="!form.get('photo').value">
+                        <i class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'"></i>
+                        <div class="ant-upload-text">Upload</div>
+                    </ng-container>
+                    <img *ngIf="form.get('photo').value" [src]="env.assetsUrl + '/' + form.get('photo').value" class="avatar" />
+                </nz-upload>
+            </div>
+            <div nzcol nzSpan="12" class="col">
+                <nz-input-group>
+                    <nz-form-control nzErrorTip="Please enter name">
+                        <input
+                            type="text"
+                            nz-input
+                            formControlName="name"
+                            placeholder="Name"
+                        />
+                    </nz-form-control>
+                </nz-input-group>
+                <nz-input-group>
+                    <nz-form-control nzErrorTip="Please enter description">
+                        <textarea
+                            nz-input
+                            formControlName="description">
+                        </textarea>
+                    </nz-form-control>
+                </nz-input-group>
+                <nz-input-group>
+                    <nz-form-control nzErrorTip="Please enter name">
+                        <nz-select formControlName="categoryId" nzAllowClear nzPlaceHolder="Category">
+                            <nz-option 
+                                *ngFor="let category of categories" 
+                                nzValue="{{ category.id }}" 
+                                nzLabel="{{ category.name }}"
+                            >
+                            </nz-option>
+                          </nz-select>
+                    </nz-form-control>
+                </nz-input-group>
+                <!-- <nz-input-group>
+                    <nz-form-control nzErrorTip="Please enter capacity">
+                        <nz-input-number 
+                            formControlName="capacity"
+                            [nzMin]="1" 
+                            [nzMax]="100" 
+                            [nzStep]="1"
+                            [nzPlaceHolder]="'Capacity'"
+                        ></nz-input-number>
+                    </nz-form-control>
+                </nz-input-group> -->
+                <button nz-button nzType="primary"><i nz-icon nzType="check" nzTheme="outline"></i> Save</button>
+            </div>
+        </div>
+    </nz-form-item>
+</form>

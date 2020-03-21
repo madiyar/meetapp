@@ -1,0 +1,37 @@
+<nz-breadcrumb>
+    <nz-breadcrumb-item>
+        <a [routerLink]="['/']"><i nz-icon nzType="home"></i></a>
+    </nz-breadcrumb-item>
+    <nz-breadcrumb-item>
+        <a [routerLink]="['/categories']"><i nz-icon nzType="bars"></i> <span>Categories</span></a>
+    </nz-breadcrumb-item>
+    <nz-breadcrumb-item>
+        {{ title }}
+    </nz-breadcrumb-item>
+</nz-breadcrumb>
+<form nz-form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <nz-form-item>
+        <nz-input-group>
+            <nz-form-control nzErrorTip="Please enter name">
+                <input
+                    type="text"
+                    nz-input
+                    formControlName="name"
+                    placeholder="Name"
+                />
+            </nz-form-control>
+        </nz-input-group>
+        <nz-input-group>
+            <nz-form-control nzErrorTip="Please enter capacity">
+                <nz-input-number 
+                    formControlName="capacity"
+                    [nzMin]="1" 
+                    [nzMax]="100" 
+                    [nzStep]="1"
+                    [nzPlaceHolder]="'Capacity'"
+                ></nz-input-number>
+            </nz-form-control>
+        </nz-input-group>
+        <button nz-button nzType="primary"><i nz-icon nzType="check" nzTheme="outline"></i> Save</button>
+    </nz-form-item>
+</form>

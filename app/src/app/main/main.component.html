@@ -1,0 +1,40 @@
+<nz-layout class="main">
+    <nz-header nzrow>
+        <div nz-col nzSpan="3" class="logo">
+            <a [routerLink]="['/']">MeetApp</a>
+        </div>
+        <div nzcol nzSpan="9">
+            <ul nz-menu nzTheme="dark" nzMode="horizontal" class="header-menu">
+                <li nz-menu-item>Admin</li>
+                <li nz-menu-item><i nz-icon nzType="logout" nzTheme="outline"></i> Sign out</li>
+            </ul>
+        </div>
+    </nz-header>
+    <nz-layout nzrow>
+        <nz-sider nzcol nzSpan="3" nzTheme="light">
+            <ul nz-menu nzMode="inline" class="sider-menu">
+                <li nz-menu-item routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{exact:
+                    true}">
+                    <a [routerLink]="['/']"><i nz-icon nzType="home" nzTheme="outline"></i> Home</a>
+                </li>
+                <li nz-menu-item routerLinkActive="ant-menu-item-selected">
+                    <a [routerLink]="['/meetings']"><i nz-icon nzType="schedule" nzTheme="outline"></i> Meetings</a>
+                </li>
+                <li nz-menu-item routerLinkActive="ant-menu-item-selected">
+                    <a [routerLink]="['/rooms']"><i nz-icon nzType="appstore" nzTheme="outline"></i> Rooms</a>
+                </li>
+                <li nz-menu-item routerLinkActive="ant-menu-item-selected">
+                    <a [routerLink]="['/categories']"><i nz-icon nzType="bars" nzTheme="outline"></i> Categories</a>
+                </li>
+                <li nz-menu-item routerLinkActive="ant-menu-item-selected">
+                    <a [routerLink]="['/users']"><i nz-icon nzType="user" nzTheme="outline"></i> Users</a>
+                </li>
+            </ul>
+        </nz-sider>
+        <nz-layout nzcol nzSpan="9" class="inner-layout">
+            <nz-content class="content">
+                <router-outlet></router-outlet>
+            </nz-content>
+        </nz-layout>
+    </nz-layout>
+</nz-layout>

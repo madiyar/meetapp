@@ -1,0 +1,35 @@
+<nz-breadcrumb>
+    <nz-breadcrumb-item>
+        <a [routerLink]="['/']"><i nz-icon nzType="home"></i></a>
+    </nz-breadcrumb-item>
+    <nz-breadcrumb-item><i nz-icon nzType="bars" nzTheme="outline"></i> <span>Categories</span></nz-breadcrumb-item>
+</nz-breadcrumb>
+<a nz-button nzType="primary" routerLink="/category/new">
+    <i nz-icon nzType="plus" nzTheme="outline"></i> Create Category
+</a>
+<hr>
+<nz-table #table [nzData]="categories">
+    <thead>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Capacity</th>
+        <th>Action</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let category of table.data">
+            <td>{{ category.id }}</td>
+            <td>{{ category.name }}</td>
+            <td>{{ category.capacity }}</td>
+            <td>
+                <nz-button-group>
+                    <button [routerLink]="['/category', category.id]" nz-button nzType="primary" nzShape="round">
+                        <i nz-icon nzType="edit" nzTheme="outline"></i>
+                    </button>
+                    <button nz-button nzType="danger" nzShape="round">
+                        <i nz-icon nzType="delete" nzTheme="outline"></i>
+                    </button>
+                </nz-button-group>
+            </td>
+        </tr>
+    </tbody>
+</nz-table>
