@@ -15,12 +15,14 @@ export class RoomsComponent implements OnInit {
   ) { }
 
   public rooms: Room[] = [];
+  roomsExist: boolean = false;
   env = environment;
 
   ngOnInit(): void {
     this.roomsService.getAll()
     .subscribe(data => {
       this.rooms = data;
+      this.roomsExist = true;
     });
   }
 

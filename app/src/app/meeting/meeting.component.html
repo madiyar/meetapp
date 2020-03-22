@@ -1,0 +1,61 @@
+<nz-breadcrumb>
+    <nz-breadcrumb-item>
+        <a [routerLink]="['/']"><i nz-icon nzType="home"></i></a>
+    </nz-breadcrumb-item>
+    <nz-breadcrumb-item>
+        <a [routerLink]="['/meetings']"><i nz-icon nzType="schedule"></i> <span>Meetings</span></a>
+    </nz-breadcrumb-item>
+    <nz-breadcrumb-item>Edit Meeting</nz-breadcrumb-item>
+</nz-breadcrumb>
+<form nz-form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <nz-form-item>
+        <nz-input-group>
+            <nz-form-control nzErrorTip="Please enter title">
+                <input
+                    type="text"
+                    nz-input
+                    formControlName="title"
+                    placeholder="Title"
+                />
+            </nz-form-control>
+        </nz-input-group>
+        <nz-input-group>
+            <nz-form-control nzErrorTip="Please enter description">
+                <textarea
+                    nz-input
+                    placeholder="Description"
+                    formControlName="description">
+                </textarea>
+            </nz-form-control>
+        </nz-input-group>
+        <nz-radio-group formControlName="freeEntry" nzErrorTip="Choose entry type">
+            <label nz-radio nzValue="0">By invitation</label>
+            <label nz-radio nzValue="1">Free entry</label>
+        </nz-radio-group>
+        <nz-input-group>
+            <nz-form-control nzErrorTip="Please choose room">
+                <nz-select formControlName="roomId" nzShowSearch nzAllowClear nzPlaceHolder="Room">
+                    <nz-option 
+                        *ngFor="let room of rooms" 
+                        nzValue="{{ room.id }}" 
+                        nzLabel="{{ room.name }}"
+                    >
+                    </nz-option>
+                  </nz-select>
+            </nz-form-control>
+        </nz-input-group>
+        
+
+        <nz-input-group>
+            <nz-range-picker
+                [nzShowTime]="{ nzFormat: 'HH:mm' }"
+                nzFormat="yyyy-MM-dd HH:mm:ss"
+                [nzPlaceHolder]="['Start Time', 'End Time']"
+                (nzOnOk)="onDateSelected($event)"
+            ></nz-range-picker>
+        </nz-input-group>
+
+
+        <button nz-button nzType="primary"><i nz-icon nzType="check" nzTheme="outline"></i> Save</button>
+    </nz-form-item>
+</form>

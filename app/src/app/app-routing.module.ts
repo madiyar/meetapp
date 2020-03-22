@@ -13,6 +13,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { UserComponent } from './user/user.component';
 import { CategoryComponent } from './category/category.component';
 import { RoomComponent } from './room/room.component';
+import { MeetingComponent } from './meeting/meeting.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
     component: MainComponent,
     children: [
       { path: '', component: HomeComponent },
+      { path: 'meeting/:id', component: MeetingComponent },
       { path: 'meetings', component: MeetingsComponent },
       { path: 'room/new', component: RoomComponent },
       { path: 'room/:id', component: RoomComponent },

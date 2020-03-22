@@ -36,8 +36,8 @@ export class Meeting {
     @ManyToOne(type => Room, room => room.id)
     room: Room;
 
-    @ManyToOne(type => User, user => user.id)
-    user: User;
+    @ManyToOne(type => User, creator => creator.id)
+    creator: User;
 
     @OneToMany(type => Participan, participan => participan.meetingId)
     participans: Promise<Participan[]>;

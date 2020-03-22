@@ -23,6 +23,7 @@ export class RoomComponent implements OnInit {
   env = environment;
   title: string = "New Room";
   loading: boolean;
+  loadingLocation: boolean;
   isLoading: boolean;
 
   constructor(
@@ -62,7 +63,7 @@ export class RoomComponent implements OnInit {
       description: new FormControl('', Validators.required),
       photo: new FormControl(''),
       location: new FormControl(''),
-      categoryId: new FormControl('', Validators.required),
+      categoryId: new FormControl(null, Validators.required),
     });
   }
 
@@ -107,18 +108,30 @@ export class RoomComponent implements OnInit {
       });
   }
 
-  handleChange(info: { file: UploadFile }): void {
+  handleChange(info: { file: UploadFile }, type = 'image'): void {
     switch (info.file.status) {
       case 'uploading':
-        this.loading = true;
+        if(type === 'location') {
+          this.loadingLocation = true;
+        } else {
+          this.loading = true;
+        }
         break;
       case 'done':
         // Get this url from response in real world.
         console.log(info.file);
-        this.form.get('photo').setValue(info.file.response.filename)
+        if(type === 'location') {
+          this.form.get('location').setValue(info.file.response.filename)
+        } else {
+          this.form.get('photo').setValue(info.file.response.filename)
+        }
         break;
       case 'error':
-        this.loading = false;
+        if(type === 'location') {
+          this.loadingLocation = false;
+        } else {
+          this.loading = false;
+        }
         break;
     }
   }

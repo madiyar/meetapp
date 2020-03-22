@@ -10,6 +10,13 @@ nz-breadcrumb {
 [nz-col] {
     padding: 10px;
     img {
-        height: 200px;
+        height: 160px;
+    }
+    nz-card {
+        margin: 10px;
+        &:hover {
+            box-shadow: 0 0 1em rgba(0,0,0,.2);
+            transform: scale(1.02);
+        }
     }
 }

@@ -20,12 +20,30 @@
                     nzListType="picture-card"
                     [nzShowUploadList]="false"
                     (nzChange)="handleChange($event)"
+                    nzTooltipTitle="Photo" 
+                    nz-tooltip
                 >
                     <ng-container *ngIf="!form.get('photo').value">
-                        <i class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'"></i>
-                        <div class="ant-upload-text">Upload</div>
+                        <i class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'picture'"></i>
+                        <div class="ant-upload-text">Photo</div>
                     </ng-container>
                     <img *ngIf="form.get('photo').value" [src]="env.assetsUrl + '/' + form.get('photo').value" class="avatar" />
+                </nz-upload>
+                <nz-upload
+                    class="avatar-uploader"
+                    nzAction="{{ env.apiUrl }}/uploader/image"
+                    nzName="file"
+                    nzListType="picture-card"
+                    [nzShowUploadList]="false"
+                    (nzChange)="handleChange($event, 'location')"
+                    nzTooltipTitle="Location" 
+                    nz-tooltip
+                >
+                    <ng-container *ngIf="!form.get('location').value">
+                        <i class="upload-icon" nz-icon [nzType]="loadingLocation ? 'loading' : 'apartment'"></i>
+                        <div class="ant-upload-text">Location</div>
+                    </ng-container>
+                    <img *ngIf="form.get('location').value" [src]="env.assetsUrl + '/' + form.get('location').value" class="avatar" />
                 </nz-upload>
             </div>
             <div nzcol nzSpan="12" class="col">
@@ -43,13 +61,14 @@
                     <nz-form-control nzErrorTip="Please enter description">
                         <textarea
                             nz-input
+                            placeholder="Description"
                             formControlName="description">
                         </textarea>
                     </nz-form-control>
                 </nz-input-group>
                 <nz-input-group>
-                    <nz-form-control nzErrorTip="Please enter name">
-                        <nz-select formControlName="categoryId" nzAllowClear nzPlaceHolder="Category">
+                    <nz-form-control nzErrorTip="Please choose category">
+                        <nz-select formControlName="categoryId" nzShowSearch nzAllowClear nzPlaceHolder="Category">
                             <nz-option 
                                 *ngFor="let category of categories" 
                                 nzValue="{{ category.id }}" 
@@ -59,17 +78,6 @@
                           </nz-select>
                     </nz-form-control>
                 </nz-input-group>
-                <!-- <nz-input-group>
-                    <nz-form-control nzErrorTip="Please enter capacity">
-                        <nz-input-number 
-                            formControlName="capacity"
-                            [nzMin]="1" 
-                            [nzMax]="100" 
-                            [nzStep]="1"
-                            [nzPlaceHolder]="'Capacity'"
-                        ></nz-input-number>
-                    </nz-form-control>
-                </nz-input-group> -->
                 <button nz-button nzType="primary"><i nz-icon nzType="check" nzTheme="outline"></i> Save</button>
             </div>
         </div>

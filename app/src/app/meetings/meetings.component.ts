@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MeetingsService } from '../shared/services/meetings.service';
+import { Meeting } from '../shared/types/meeting.types';
 
 @Component({
   selector: 'app-meetings',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MeetingsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private meetingsService: MeetingsService) { }
+
+  meetings: Meeting[] = [];
 
   ngOnInit(): void {
+    this.meetingsService.getAll()
+    .subscribe(data => {
+      this.meetings = data;
+    });
   }
 
 }

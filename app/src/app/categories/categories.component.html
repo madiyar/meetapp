@@ -22,10 +22,23 @@
             <td>{{ category.capacity }}</td>
             <td>
                 <nz-button-group>
-                    <button [routerLink]="['/category', category.id]" nz-button nzType="primary" nzShape="round">
+                    <button 
+                        [routerLink]="['/category', category.id]" 
+                        nz-button 
+                        nzType="primary" 
+                        nzShape="round"
+                        nz-tooltip
+                        nzTooltipTitle="Edit"
+                    >
                         <i nz-icon nzType="edit" nzTheme="outline"></i>
                     </button>
-                    <button nz-button nzType="danger" nzShape="round">
+                    <button 
+                        nz-button 
+                        nzType="danger" 
+                        nzShape="round"
+                        nz-tooltip
+                        nzTooltipTitle="Delete"
+                    >
                         <i nz-icon nzType="delete" nzTheme="outline"></i>
                     </button>
                 </nz-button-group>

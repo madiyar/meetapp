@@ -20,6 +20,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { UserComponent } from './user/user.component';
 import { CategoryComponent } from './category/category.component';
 import { RoomComponent } from './room/room.component';
+import { MeetingComponent } from './meeting/meeting.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { RoomComponent } from './room/room.component';
     PageNotFoundComponent,
     UserComponent,
     CategoryComponent,
-    RoomComponent
+    RoomComponent,
+    MeetingComponent
   ],
   imports: [
     BrowserModule,
