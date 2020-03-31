@@ -33,10 +33,10 @@ export class Meeting {
     @Column({type: 'boolean', default: 0})
     isCanceled: boolean;
 
-    @ManyToOne(type => Room, room => room.id)
+    @ManyToOne(type => Room, room => room.id, {eager: true})
     room: Room;
 
-    @ManyToOne(type => User, creator => creator.id)
+    @ManyToOne(type => User, creator => creator.id, {eager: true})
     creator: User;
 
     @OneToMany(type => Participan, participan => participan.meetingId)

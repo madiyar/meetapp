@@ -1,0 +1,129 @@
+@import '~antd/dist/antd.css';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800;900&display=swap');
+
+.Main {
+  height: 100vh;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+.Main .Sider {
+  box-shadow: 0 0 1em rgba(73, 106, 167, 0.212);
+  z-index: 3;
+}
+
+.Main .Menu {
+  border-right-color: transparent;
+}
+
+.Main .logo {
+  display: block;
+  height: 64px;
+  line-height: 64px;
+  font-size: 25px;
+  font-weight: 800;
+  padding: 0 15px;
+  text-align: center;
+  color: #f01a4e;
+}
+
+.Main .Content {
+  overflow-y: scroll;
+  padding: 35px;
+}
+
+.Wrap {
+  background: #fff;
+  box-shadow: 0 0 1em rgba(73, 106, 167, 0.212);
+}
+
+.findRoom {
+  background: url(https://c.pxhere.com/photos/a8/c3/coffee_cup_desk_eye_glasses_indoors_laptop_mug_pot_plant-912411.jpg!d);
+  background-size: cover;
+  padding: 150px 100px;
+}
+
+.findRoom__form .col>* {
+  width: 100%;
+}
+
+.MeetingsList {
+  padding: 25px;
+}
+
+.meetingInCell {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.meetingInCell li {
+  padding: 0 10px;
+  border-radius: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  margin: 5px 0;
+}
+
+.RoomList {
+  padding: 25px;
+}
+
+.Home__rooms .card {
+  box-shadow: 0 0 .7em rgba(73, 106, 167, 0.1);
+  margin-bottom: 25px;
+  transition: 0.2s box-shadow;
+}
+
+.Home__rooms .card:hover {
+  box-shadow: 0 0 .9em rgba(73, 106, 167, 0.3);
+}
+
+.roomImg {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+
+.roomImg .info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.295);
+  color: #fff;
+  text-shadow: 0 0 .3em #000;
+}
+
+.Home__rooms .card img {
+  width: 100%;
+  height: 150px;
+}
+
+.room__description {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.room__description .info {
+  text-overflow: ellipsis;
+  height: 45px;
+  overflow: hidden;
+}
+
+.Auth {
+  background: #fff;
+  margin-top: 25px;
+  padding: 25px;
+  box-shadow: 0 0 1em rgba(73, 106, 167, 0.212);
+}
+
+.Profile {
+  padding: 25px;
+}
+
+.RoomView {
+  padding: 25px;
+}

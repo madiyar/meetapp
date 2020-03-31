@@ -14,10 +14,10 @@ export class Participan {
     @Column()
     meetingId: number;
 
-    @ManyToOne(type => User, user => user.id)
+    @ManyToOne(type => User, user => user.id, {eager: true})
     user: User;
 
-    @ManyToOne(type => Meeting, meeting => meeting.id)
+    @ManyToOne(type => Meeting, meeting => meeting.id, {eager: true})
     meeting: Meeting;
     
 }

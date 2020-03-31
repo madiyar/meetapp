@@ -23,7 +23,7 @@ export class Room {
     @Column()
     categoryId: number;
 
-    @ManyToOne(type => Category, category => category.id)
+    @ManyToOne(type => Category, category => category.id, {eager: true})
     category: Category;
 
     @OneToMany(type => Meeting, meeting => meeting.roomId)

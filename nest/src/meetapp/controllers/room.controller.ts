@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Body, Put, Param, Delete } from "@nestjs/common";
 import { RoomService } from '../services/room.service';
 import { MeetingService } from '../services/meeting.service';
+import { Not, Any, In } from "typeorm";
 
 @Controller('rooms')
 export class RoomController {
@@ -13,7 +14,7 @@ export class RoomController {
     // Все комнаты
     @Get()
     getAll() {
-        return this.service.getAll();
+        return this.service.getAll({order: {id: 'ASC'}});
     }
 
     // Одна комната
@@ -26,6 +27,12 @@ export class RoomController {
     @Get(':id/meetings')
     getMeetings(@Param('id') id: number) {
         return this.meetingService.getAll({where: {roomId: id, isCanceled: 0}});
+    }
+
+    // Все комнаты кроме ids: [?, ?, ?]
+    @Post('free')
+    getFreeRooms(@Body() data) {
+        return this.service.getAll({where: {id: Not(In(data.ids))}})
     }
 
     // Создать комнату

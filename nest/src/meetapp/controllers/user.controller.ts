@@ -35,13 +35,13 @@ export class UserController {
     // Встречи организованные этим пользователем
     @Get(':id/meetings/created')
     getCreatedMeetings(@Param('id') id: number) {
-        return this.meetingService.getAll({where: {creatorId: id}});
+        return this.meetingService.getAll({where: {creatorId: id}, order: {startDate: 'DESC'}});
     }
 
     // Встречи где участвовал пользователь
     @Get(':id/meetings')
     getMeetings(@Param('id') id: number) {
-        return this.participanService.getAll({where: {userId: id}});
+        return this.participanService.getAll({where: {userId: id}, order: {id: 'DESC'}});
     }
 
     // Добавить пользователя
