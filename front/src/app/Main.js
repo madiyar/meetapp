@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Switch, Route, Redirect, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 import { Layout } from 'antd';
 import Home from './home/Home';
@@ -25,9 +25,7 @@ function Main() {
                                 {user ? <Home /> : <Auth />}
                             </Route>
                             <Route path="/rooms/:roomId">
-                                <div className="Wrap">
-                                    <ViewRoom />
-                                </div>
+                                <ViewRoom />
                             </Route>
                             <Route path="/rooms">
                                 <div className="Wrap">

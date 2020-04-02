@@ -1,4 +1,4 @@
-import { GET_FREE_ROOMS, SET_ROOMS_LOADING, GET_ALL_ROOMS, GET_ONE_ROOM } from "../types"
+import { GET_FREE_ROOMS, SET_ROOMS_LOADING, GET_ALL_ROOMS, GET_ONE_ROOM, GET_ROOMS_MEETINGS } from "../types"
 
 export const setFreeRooms = rooms => {
     return {
@@ -18,6 +18,13 @@ export const setRoom = room => {
     return {
         type: GET_ONE_ROOM,
         payload: room
+    }
+}
+
+export const setRoomsMeetings = meetings => {
+    return {
+        type: GET_ROOMS_MEETINGS,
+        payload: meetings
     }
 }
 

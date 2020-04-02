@@ -1,4 +1,4 @@
-import { GET_ALL_MEETINGS, SET_MEETINGS_LOADING, GET_CREATED_MEETINGS, GET_VISITED_MEETINGS } from "../types";
+import { GET_ALL_MEETINGS, SET_MEETINGS_LOADING, GET_CREATED_MEETINGS, GET_VISITED_MEETINGS, ADD_MEETING } from "../types";
 
 const initialState = {
     meetingsData: null,
@@ -24,7 +24,7 @@ export default function(state = initialState, action) {
                 ...state,
                 visitedMeetings: action.payload
             }
-        case "ADD_MEETING":
+        case ADD_MEETING:
             return {
                 ...state,
                 meetingsData: [...state.meetingsData, action.payload]

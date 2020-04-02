@@ -11,7 +11,7 @@ const { Meta } = Card;
 const Rooms = ({ rooms, loading, getRooms }) => {
     useEffect(() => {
         getRooms();
-    }, []);
+    }, [rooms]);
     return (
         rooms ? (
         <Layout.Content className="RoomList">

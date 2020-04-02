@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Layout, Typography, Calendar, Badge, Empty } from 'antd';
+import { getMeetings } from '../redux/effects/meetings.effects';
 
-function MeetingsList({meetings}) {
+function MeetingsList({meetings, getMeetings}) {
+
+    useEffect(() => {
+        getMeetings();
+    }, [meetings]);
 
     function cellRender(value) {
         let listData = [];
@@ -42,4 +47,4 @@ const mapStateToProps = state => ({
     meetings: state.meetings.meetingsData
 });
 
-export default connect(mapStateToProps)(MeetingsList);
+export default connect(mapStateToProps, {getMeetings})(MeetingsList);

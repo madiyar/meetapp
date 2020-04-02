@@ -1,4 +1,4 @@
-import { GET_ALL_MEETINGS, SET_MEETINGS_LOADING, GET_CREATED_MEETINGS, GET_VISITED_MEETINGS } from "../types"
+import { GET_ALL_MEETINGS, SET_MEETINGS_LOADING, GET_CREATED_MEETINGS, GET_VISITED_MEETINGS, ADD_MEETING } from "../types"
 
 export const setMeetings = meetings => {
     return {
@@ -30,7 +30,7 @@ export const setLoading = status => {
 
 export const addMeeting = meeting => {
     return {
-        type: "ADD_MEETING",
+        type: ADD_MEETING,
         payload: meeting,
     }
 }

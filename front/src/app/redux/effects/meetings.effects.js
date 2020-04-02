@@ -1,4 +1,4 @@
-import { setMeetings, setLoading, setCreatedMeetings, setVisitedMeetings } from "../actions/meetings.actions";
+import { setMeetings, setLoading, setCreatedMeetings, setVisitedMeetings, addMeeting } from "../actions/meetings.actions";
 
 export function getMeetings() {
     return function(dispatch, getState) {
@@ -57,5 +57,28 @@ export function getVisitedMeetings() {
             .finally(() => {
                 dispatch(setLoading(false));
             });
+    }
+}
+
+export function createMeeting(data) {
+    return function(dispatch, getState) {
+        const meetingOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data.meeting)
+        };
+        return fetch('http://localhost:8080/meetings', meetingOptions)
+            .then(res => res.json())
+            .then(meeting => {
+                data.participans.map(participan => {
+                    const participanOptions = {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({meetingId: meeting.id, userId: parseInt(participan)})
+                    };
+                    return fetch('http://localhost:8080/participans', participanOptions);
+                });
+                dispatch(addMeeting(meeting));
+            })
     }
 }

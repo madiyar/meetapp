@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Put, Param, Delete } from "@nestjs/common";
 import { RoomService } from '../services/room.service';
 import { MeetingService } from '../services/meeting.service';
-import { Not, Any, In } from "typeorm";
+import { Not, Any, In, Between } from "typeorm";
 
 @Controller('rooms')
 export class RoomController {
@@ -28,6 +28,21 @@ export class RoomController {
     getMeetings(@Param('id') id: number) {
         return this.meetingService.getAll({where: {roomId: id, isCanceled: 0}});
     }
+
+    // Встречи сегодня
+    @Get(':id/meetings/today')
+    getToday(@Param('id') id: number) {
+        const today = new Date(Date.now());
+        const mm = today.getMonth() + 1;
+        const dd = today.getDate();
+        const todayString = [today.getFullYear(), (mm>9?'':'0')+mm, (dd>9?'':'0')+dd].join('-');
+        return this.meetingService.getAll({where: {
+            startDate: Between(todayString+' 00:00:00', todayString+' 23:59:59'),
+            roomId: id,
+            isCanceled: 0
+        }, order: {startDate: 'DESC'}});
+    }
+
 
     // Все комнаты кроме ids: [?, ?, ?]
     @Post('free')

@@ -1,23 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { DatePicker, TimePicker, Button, Row, Col, notification } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
-import { getMeetings } from '../redux/effects/meetings.effects';
 import { getFreeRooms } from '../redux/effects/rooms.effects';
 import MeetingsList from './MeetingsList';
 import RoomList from './RoomList';
 
 const { RangePicker } = TimePicker;
 
-const Home = ({ getMeetings, getFreeRooms }) => {
+const Home = ({ getFreeRooms }) => {
     const [date, setDate] = useState("");
     const [startTime, setStartTime] = useState("");
     const [endTime, setEndTime] = useState("");
+    const [dateTime, setDateTime] = useState({});
     const [showRooms, setShowRooms] = useState(false);
-
-    useEffect(() => {
-        getMeetings();
-    }, []);
 
     function dateOnChange(date, dateString) {
         setDate(dateString);
@@ -31,6 +27,7 @@ const Home = ({ getMeetings, getFreeRooms }) => {
     function findRoom() {
         if(date && startTime && endTime) {
             setShowRooms(true);
+            setDateTime({startDate: `${date} ${startTime}`, endDate: `${date} ${endTime}`});
             getFreeRooms(`${date} ${startTime}`, `${date} ${endTime}`);
         } else {
             notification['error']({
@@ -56,10 +53,10 @@ const Home = ({ getMeetings, getFreeRooms }) => {
                     </Col>
                 </Row>
             </div>
-            {showRooms ? <RoomList /> : ''}
+            {showRooms ? <RoomList dateTime={dateTime} /> : ''}
             <MeetingsList />
         </div>
     )
 }
 
-export default connect(null, { getMeetings, getFreeRooms })(Home);
+export default connect(null, { getFreeRooms })(Home);

@@ -1,9 +1,10 @@
-import { GET_FREE_ROOMS, SET_ROOMS_LOADING, GET_ALL_ROOMS, GET_ONE_ROOM } from "../types";
+import { GET_FREE_ROOMS, SET_ROOMS_LOADING, GET_ALL_ROOMS, GET_ONE_ROOM, GET_ROOMS_MEETINGS } from "../types";
 
 const initialState = {
     freeRoomsData: null,
     roomsData: null,
     selectedRoom: null,
+    roomsMeetings: null,
     loading: false,
 };
 
@@ -18,6 +19,11 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 roomsData: action.payload
+            }
+        case GET_ROOMS_MEETINGS:
+            return {
+                ...state,
+                roomsMeetings: action.payload
             }
         case GET_ONE_ROOM:
             return {
