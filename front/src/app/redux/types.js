@@ -1,3 +1,4 @@
+export const API_URL = 'http://localhost:8080'
 export const GET_ALL_ROOMS = 'GET_ALL_ROOMS';
 export const GET_FREE_ROOMS = 'GET_FREE_ROOMS';
 export const GET_ONE_ROOM = 'GET_ONE_ROOM';
