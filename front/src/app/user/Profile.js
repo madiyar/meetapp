@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Layout, Typography, Divider, Button, List, Radio, Spin } from "antd"
 import { MailOutlined, PhoneOutlined, UserOutlined, CloseOutlined } from '@ant-design/icons';
 import { getCreatedMeetings, getVisitedMeetings } from '../redux/effects/meetings.effects';
+import { API_URL } from '../redux/types';
 
 const { Content } = Layout;
 
@@ -55,7 +56,7 @@ const Profile = ({ createdMeetings, visitedMeetings, loading, getCreatedMeetings
                                 <img
                                     width={272}
                                     alt="logo"
-                                    src={`http://localhost:8080/${(item.room.photo)?item.room.photo:'nophoto.png'}`}
+                                    src={`${API_URL}/${(item.room.photo)?item.room.photo:'nophoto.png'}`}
                                 />
                             }
                         >

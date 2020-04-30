@@ -1,9 +1,10 @@
 import { setMeetings, setLoading, setCreatedMeetings, setVisitedMeetings, addMeeting } from "../actions/meetings.actions";
+import { API_URL } from '../types';
 
 export function getMeetings() {
     return function(dispatch, getState) {
         dispatch(setLoading(true));
-        return fetch('http://localhost:8080/meetings')
+        return fetch(`${API_URL}/meetings`)
             .then(res => res.json())
             .then(meetings => {
                 if (!meetings || !meetings.length) {
@@ -22,7 +23,7 @@ export function getCreatedMeetings() {
     return function(dispatch, getState) {
         dispatch(setLoading(true));
         const id = JSON.parse(localStorage.getItem('user')).id;
-        return fetch(`http://localhost:8080/users/${id}/meetings/created`)
+        return fetch(`${API_URL}/users/${id}/meetings/created`)
             .then(res => res.json())
             .then(meetings => {
                 if (!meetings || !meetings.length) {
@@ -41,7 +42,7 @@ export function getVisitedMeetings() {
     return function(dispatch, getState) {
         dispatch(setLoading(true));
         const id = JSON.parse(localStorage.getItem('user')).id;
-        return fetch(`http://localhost:8080/users/${id}/meetings`)
+        return fetch(`${API_URL}/users/${id}/meetings`)
             .then(res => res.json())
             .then(meetings => {
                 if (!meetings || !meetings.length) {
@@ -67,7 +68,7 @@ export function createMeeting(data) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data.meeting)
         };
-        return fetch('http://localhost:8080/meetings', meetingOptions)
+        return fetch(`${API_URL}/meetings`, meetingOptions)
             .then(res => res.json())
             .then(meeting => {
                 data.participans.map(participan => {
@@ -76,7 +77,7 @@ export function createMeeting(data) {
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({meetingId: meeting.id, userId: parseInt(participan)})
                     };
-                    return fetch('http://localhost:8080/participans', participanOptions);
+                    return fetch(`${API_URL}/participans`, participanOptions);
                 });
                 dispatch(addMeeting(meeting));
             })

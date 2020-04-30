@@ -4,6 +4,7 @@ import { Layout, Typography, Row, Col, Card, Spin, Modal, Form, Input, Button, S
 import { PlusOutlined } from '@ant-design/icons';
 import { getAllUsers } from '../redux/effects/users.effects';
 import { createMeeting } from '../redux/effects/meetings.effects';
+import { API_URL } from '../redux/types';
 
 const { Meta } = Card;
 const { Option } = Select;
@@ -69,7 +70,7 @@ function RoomList({dateTime, rooms, loading, users, getAllUsers, createMeeting})
                             cover={
                                 <img
                                     alt={room.name}
-                                    src={`http://localhost:8080/${room.photo ? room.photo : 'nophoto.png'}`}
+                                    src={`${API_URL}/${room.photo ? room.photo : 'nophoto.png'}`}
                                 />
                             }
                             actions={

@@ -5,6 +5,7 @@ import { Layout, Typography, Row, Col, Card, Spin } from 'antd';
 import { EyeOutlined } from '@ant-design/icons';
 import { green, red } from '@ant-design/colors';
 import { Link } from 'react-router-dom';
+import { API_URL } from '../redux/types';
 
 const { Meta } = Card;
 
@@ -25,7 +26,7 @@ const Rooms = ({ rooms, loading, getRooms }) => {
                             <div className="roomImg">
                                 <img
                                     alt={room.name}
-                                    src={`http://localhost:8080/${room.photo ? room.photo : 'nophoto.png'}`}
+                                    src={`${API_URL}/${room.photo ? room.photo : 'nophoto.png'}`}
                                 />
                                 <div className="info">
                                     {

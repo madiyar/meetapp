@@ -5,6 +5,7 @@ import { getOneRoom, getRoomsMeetings } from '../redux/effects/rooms.effects';
 import { Layout, Spin, Typography, Breadcrumb, Row, Col, Carousel, List } from 'antd';
 import { HomeOutlined, AppstoreOutlined, UserOutlined, ApartmentOutlined, InfoCircleOutlined, ClockCircleOutlined } from '@ant-design/icons';
 import { green, red } from '@ant-design/colors';
+import { API_URL } from '../redux/types';
 
 const ViewRoom = ({ room, meetings, loading, getOneRoom, getRoomsMeetings }) => {
     const { roomId } = useParams();
@@ -24,8 +25,8 @@ const ViewRoom = ({ room, meetings, loading, getOneRoom, getRoomsMeetings }) => 
                 <Row style={{marginTop: '10px'}}>
                     <Col span={9}>
                         <Carousel className="img" nextArrow>
-                            <img src={`http://localhost:8080/${(room.photo) ? room.photo : 'nophoto.png'}`} />
-                            <img src={`http://localhost:8080/${(room.location) ? room.location : 'nophoto.png'}`} />
+                            <img src={`${API_URL}/${(room.photo) ? room.photo : 'nophoto.png'}`} />
+                            <img src={`${API_URL}/${(room.location) ? room.location : 'nophoto.png'}`} />
                         </Carousel>
                     </Col>
                     <Col span={15} style={{padding: '10px 20px'}}>

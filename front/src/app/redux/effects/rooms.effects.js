@@ -1,4 +1,5 @@
 import { setFreeRooms, setRooms, setLoading, setRoom, setRoomsMeetings } from "../actions/rooms.actions";
+import { API_URL } from '../types';
 
 export function getFreeRooms(startDate, endDate) {
     return function(dispatch, getState) {
@@ -8,7 +9,7 @@ export function getFreeRooms(startDate, endDate) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ startDate: startDate, endDate: endDate })
         };
-        return fetch('http://localhost:8080/meetings/find-room', meetingsOptions)
+        return fetch(`${API_URL}/meetings/find-room`, meetingsOptions)
             .then(response => response.json())
             .then(meetings => {
                 let rooms = [];
@@ -27,7 +28,7 @@ export function getFreeRooms(startDate, endDate) {
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ ids: rooms })
                     };
-                    return fetch('http://localhost:8080/rooms/free', roomsOptions)
+                    return fetch(`${API_URL}/rooms/free`, roomsOptions)
                         .then(res => res.json())
                         .then(rooms => {
                             if (!rooms || !rooms.length) {
@@ -44,7 +45,7 @@ export function getFreeRooms(startDate, endDate) {
                         method: 'GET',
                         headers: { 'Content-Type': 'application/json' }
                     };
-                    return fetch('http://localhost:8080/rooms', roomsOptions)
+                    return fetch(`${API_URL}/rooms`, roomsOptions)
                         .then(res => res.json())
                         .then(rooms => {
                             if (!rooms || !rooms.length) {
@@ -64,7 +65,7 @@ export function getFreeRooms(startDate, endDate) {
 export function getRooms() {
     return function(dispatch, getState) {
         dispatch(setLoading(true));
-        return fetch('http://localhost:8080/meetings/today')
+        return fetch(`${API_URL}/meetings/today`)
             .then(response => response.json())
             .then(meetings => {
                 let todayMeetings = [];
@@ -81,7 +82,7 @@ export function getRooms() {
                 return todayMeetings;
             })
             .then(todayMeetings => {
-                return fetch('http://localhost:8080/rooms')
+                return fetch(`${API_URL}/rooms`)
                     .then(res => res.json())
                     .then(rooms => {
                         if (!rooms || !rooms.length) {
@@ -116,66 +117,10 @@ export function getRooms() {
     }
 }
 
-/*
-export function getRooms() {
-    return function(dispatch, getState) {
-        dispatch(setLoading(true));
-        return fetch('http://localhost:8080/meetings/today')
-            .then(response => response.json())
-            .then(meetings => {
-                let todayMeetings = [];
-                meetings.map(meeting => {
-                    if(!todayMeetings.includes(meeting.roomId)) {
-                        let sD = new Date(Date.parse(meeting.startDate))
-                        let eD = new Date(Date.parse(meeting.endDate))
-                        sD = `${(sD.getHours()>9)?sD.getHours():'0'+sD.getHours()}:${(sD.getMinutes()>9)?sD.getMinutes():'0'+sD.getMinutes()}`;
-                        eD = `${(eD.getHours()>9)?eD.getHours():'0'+eD.getHours()}:${(eD.getMinutes()>9)?eD.getMinutes():'0'+eD.getMinutes()}`;
-                        todayMeetings.push({...meeting.room, startDate: sD, endDate: eD });
-                    }
-                    return meeting;
-                });
-                return todayMeetings;
-            })
-            .then(todayMeetings => {
-                return fetch('http://localhost:8080/rooms')
-                    .then(res => res.json())
-                    .then(rooms => {
-                        if (!rooms || !rooms.length) {
-                            dispatch(setRooms(null));
-                            return;
-                        }
-                        let allRooms = [];
-                        rooms.map(room => {
-                            if(todayMeetings.length) {
-                                todayMeetings.map(item => {
-                                    if(item.id === room.id) {
-                                        allRooms.push(item);
-                                    } else {
-                                        allRooms.push(room);
-                                    }
-                                    return item;
-                                });
-                            } else {
-                                allRooms.push(room);
-                            }
-                            return room;
-                        })
-                        dispatch(setRooms(allRooms));
-                    })
-                    .finally(() => {
-                        dispatch(setLoading(false));
-                    });
-            })
-            
-    }
-}
-*/
-
-
 export function getOneRoom(id) {
     return function(dispatch, getState) {
         dispatch(setLoading(true));
-        return fetch(`http://localhost:8080/rooms/${id}`)
+        return fetch(`${API_URL}/rooms/${id}`)
             .then(res => res.json())
             .then(room => {
                 if(!room) {
@@ -192,7 +137,7 @@ export function getOneRoom(id) {
 
 export function getRoomsMeetings(id) {
     return function(dispatch, getState) {
-        return fetch(`http://localhost:8080/rooms/${id}/meetings/today`)
+        return fetch(`${API_URL}/rooms/${id}/meetings/today`)
             .then(res => res.json())
             .then(meetings => {
                 if(!meetings) {

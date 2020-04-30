@@ -1,9 +1,10 @@
 import { setUsers, setLoading } from "../actions/users.actions";
+import { API_URL } from '../types';
 
 export function getAllUsers() {
     return function(dispatch, getState) {
         dispatch(setLoading(true));
-        return fetch(`http://localhost:8080/users`)
+        return fetch(`${API_URL}/users`)
             .then(res => res.json())
             .then(users => {
                 if(!users) {

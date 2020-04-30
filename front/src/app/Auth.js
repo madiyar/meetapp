@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Layout, Row, Col, Form, Input, Button, Typography, Alert } from "antd";
 import { LockOutlined, UserOutlined, LoginOutlined } from '@ant-design/icons';
+import { API_URL } from './redux/types';
 
 const Auth = () => {
     const [authFailed, setAuthFailed] = useState(false);
@@ -11,7 +12,7 @@ const Auth = () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username: values.username, password: values.password })
         };
-        fetch('http://localhost:8080/users/auth', options)
+        fetch(`${API_URL}/users/auth`, options)
             .then(response => response.json())
             .then(user => {
                 if (!user) {
